@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  backend:
+    container_name: 'server-app'
+    build: ./server-app
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./server-app:/app
+      - /app/node_modules
+  frontend:
+    container_name: 'client_app'
+    build: ./client-app
+    ports:
+      - '4200:4200'
+    volumes:
+      - ./client-app:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
